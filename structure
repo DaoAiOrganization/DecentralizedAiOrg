@@ -1,0 +1,61 @@
+// src/index.ts
+export * from './contracts';
+export * from './utils';
+
+// src/contracts/index.ts
+import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { Program, Provider } from '@project-serum/anchor';
+
+export class ContractDeployer {
+  private connection: Connection;
+  private provider: Provider;
+
+  constructor(connection: Connection, wallet: Keypair) {
+    this.connection = connection;
+    // Initialize provider with connection and wallet
+  }
+
+  async deployStakingContract(params: StakingContractParams): Promise<PublicKey> {
+    // Implementation for staking contract deployment
+    throw new Error('Not implemented');
+  }
+
+  async deployGovernanceContract(params: GovernanceContractParams): Promise<PublicKey> {
+    // Implementation for governance contract deployment
+    throw new Error('Not implemented');
+  }
+}
+
+// src/utils/logger.ts
+import winston from 'winston';
+
+export const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+// src/tests/deployer.test.ts
+import { ContractDeployer } from '../contracts';
+import { Connection, Keypair } from '@solana/web3.js';
+
+describe('ContractDeployer', () => {
+  let deployer: ContractDeployer;
+  
+  beforeEach(() => {
+    const connection = new Connection('http://localhost:8899');
+    const wallet = Keypair.generate();
+    deployer = new ContractDeployer(connection, wallet);
+  });
+
+  test('should deploy staking contract', async () => {
+    // Test implementation
+  });
+
+  test('should deploy governance contract', async () => {
+    // Test implementation
+  });
+});
